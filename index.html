@@ -1,0 +1,241 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="description" content="S. Nandini: Python and SOC analyst portfolio.">
+<title>S. Nandini | Python & SOC Analyst</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500&family=Manrope:wght@400;600;800&display=swap" rel="stylesheet">
+<style>
+/* ---------- Design tokens ---------- */
+:root{
+  --bg:#07060c;--panel:#0f0c18;--text:#f4f1fa;--muted:#a49db8;
+  --pink:#ff2d95;--cyan:#22e5ff;--purple:#a855ff;--line:rgba(255,255,255,.09);
+  --glow-pink:0 0 6px rgba(255,45,149,.9),0 0 22px rgba(255,45,149,.55);
+  --sans:Manrope,system-ui,sans-serif;--mono:"DM Mono",ui-monospace,monospace;
+  box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px);
+}
+@media (prefers-color-scheme:light){:root:not([data-theme="dark"]){--bg:#07060c}} /* portfolio stays dark by design */
+*,*:before,*:after{box-sizing:inherit;margin:0;padding:0}
+html{scroll-behavior:smooth;scroll-padding-top:90px;height:100%}
+body{background:var(--bg);color:var(--text);font:400 1rem/1.7 var(--sans);overflow-x:hidden;min-height:100%}
+a{color:inherit;text-decoration:none}
+:focus-visible{outline:2px solid var(--cyan);outline-offset:3px}
+.wrap{max-width:1180px;margin:0 auto;padding:110px 6vw}
+.mono{font-family:var(--mono);font-size:.78rem;letter-spacing:.06em;color:var(--cyan);text-shadow:0 0 10px rgba(34,229,255,.6)}
+h1,h2,h3{line-height:1.05;letter-spacing:-.03em}
+h2{font-size:clamp(2rem,4.6vw,3.6rem);margin:.6rem 0 1.6rem}
+.neon{color:var(--pink);text-shadow:var(--glow-pink);animation:pulse 3.5s ease-in-out infinite}
+@keyframes pulse{0%,100%{opacity:1}50%{opacity:.82}}
+@keyframes flicker{0%,18%,22%,62%,64%,100%{opacity:1}20%,63%{opacity:.55}}
+
+/* ---------- Background ---------- */
+.bg-grid{position:fixed;inset:0;z-index:-2;background:
+  linear-gradient(rgba(168,85,255,.07) 1px,transparent 1px),
+  linear-gradient(90deg,rgba(168,85,255,.07) 1px,transparent 1px);
+  background-size:64px 64px;mask-image:linear-gradient(#000,transparent 85%)}
+.bg-glow{position:fixed;z-index:-1;border-radius:50%;filter:blur(90px);pointer-events:none;animation:drift 14s ease-in-out infinite alternate}
+.g1{width:520px;height:520px;right:-140px;top:5%;background:rgba(255,45,149,.22)}
+.g2{width:420px;height:420px;left:-120px;bottom:5%;background:rgba(34,229,255,.13);animation-delay:-6s}
+@keyframes drift{to{transform:translate(-40px,50px)}}
+
+/* ---------- Nav ---------- */
+.nav{position:fixed;top:0;left:0;right:0;z-index:50;display:flex;align-items:center;justify-content:space-between;
+  padding:calc(14px + env(safe-area-inset-top,0px)) 6vw 14px;transition:.3s}
+.nav.scrolled{background:rgba(7,6,12,.7);backdrop-filter:blur(16px);-webkit-backdrop-filter:blur(16px);border-bottom:1px solid rgba(255,45,149,.25);box-shadow:0 8px 30px rgba(255,45,149,.08)}
+.brand{font-weight:800;font-size:1.15rem}
+.brand b{color:var(--pink);text-shadow:var(--glow-pink);animation:flicker 6s infinite}
+.links{display:flex;gap:2rem;font-size:.86rem;color:var(--muted)}
+.links a{transition:.2s}
+.links a:hover,.links a.active{color:var(--pink);text-shadow:var(--glow-pink)}
+.menu{display:none;background:none;border:1px solid var(--line);color:var(--text);border-radius:10px;padding:.35rem .7rem;font-size:1.2rem;cursor:pointer}
+
+/* ---------- Hero ---------- */
+.hero{min-height:100vh;display:grid;grid-template-columns:1.15fr .85fr;gap:4vw;align-items:center}
+.status{font:500 .72rem var(--mono);letter-spacing:.1em;color:var(--muted);margin-bottom:1.4rem}
+.dot{display:inline-block;width:8px;height:8px;border-radius:50%;background:var(--pink);margin-right:8px;box-shadow:var(--glow-pink);animation:pulse 1.6s infinite}
+h1{font-size:clamp(2.8rem,7vw,5.8rem);font-weight:800}
+.hero p.lead{max-width:540px;color:var(--muted);margin:1.6rem 0 2.2rem}
+.btns{display:flex;gap:12px;flex-wrap:wrap}
+.btn{display:inline-flex;align-items:center;gap:.6rem;padding:.85rem 1.4rem;border-radius:100px;font-weight:600;font-size:.88rem;border:1px solid var(--pink);transition:.25s;cursor:pointer}
+.btn.primary{background:var(--pink);color:#12030b;box-shadow:var(--glow-pink)}
+.btn.primary:hover{transform:translateY(-3px);box-shadow:0 0 12px var(--pink),0 0 40px rgba(255,45,149,.7)}
+.btn.ghost{color:var(--pink)}
+.btn.ghost:hover{background:rgba(255,45,149,.1);box-shadow:var(--glow-pink)}
+.visual{position:relative;display:grid;place-items:center;min-height:460px}
+.ring{position:absolute;width:min(470px,100%);aspect-ratio:1;border-radius:50%;border:1px solid rgba(255,45,149,.45);box-shadow:0 0 30px rgba(255,45,149,.25),inset 0 0 30px rgba(255,45,149,.12);animation:spin 22s linear infinite}
+.ring:before{content:"";position:absolute;top:-5px;left:50%;width:10px;height:10px;border-radius:50%;background:var(--cyan);box-shadow:0 0 14px var(--cyan)}
+@keyframes spin{to{transform:rotate(360deg)}}
+.card{position:relative;width:min(320px,80%);background:linear-gradient(150deg,#1a1024,var(--panel));border:1px solid rgba(255,45,149,.5);border-radius:24px;padding:24px;box-shadow:0 0 28px rgba(255,45,149,.3),0 30px 80px #000}
+.avatar{height:170px;border-radius:16px;display:grid;place-items:center;font-size:4.2rem;font-weight:800;color:var(--pink);text-shadow:var(--glow-pink);background:radial-gradient(circle at 55% 40%,rgba(255,45,149,.3),transparent 60%),#0a0710;border:1px solid rgba(255,45,149,.3)}
+.card h3{margin:16px 0 2px;font-size:1.25rem}
+.card small{color:var(--muted)}
+.term{margin-top:14px;background:#05040a;border:1px solid rgba(34,229,255,.25);border-radius:10px;padding:12px;font:11px/1.9 var(--mono);color:#ddd}
+.term .p{color:var(--pink)}
+.caret{color:var(--cyan);animation:flicker 1s steps(2) infinite}
+
+/* ---------- Cards / grids ---------- */
+.lead-in{color:var(--muted);max-width:640px}
+.grid{display:grid;gap:16px;margin-top:2.4rem}
+.grid.g3{grid-template-columns:repeat(3,1fr)}
+.grid.g4{grid-template-columns:repeat(4,1fr)}
+.box{background:var(--panel);border:1px solid rgba(255,45,149,.22);border-radius:18px;padding:26px;transition:.3s;position:relative}
+.box:hover{transform:translateY(-6px);border-color:var(--pink);box-shadow:0 0 22px rgba(255,45,149,.45),inset 0 0 20px rgba(255,45,149,.08)}
+.box h3{font-size:1.15rem;margin:.9rem 0 .5rem;letter-spacing:-.01em}
+.box p{color:var(--muted);font-size:.9rem}
+.ico{display:grid;place-items:center;width:46px;height:46px;border-radius:12px;font:600 .75rem var(--mono);color:var(--cyan);border:1px solid rgba(34,229,255,.5);box-shadow:0 0 14px rgba(34,229,255,.3);text-shadow:0 0 8px var(--cyan)}
+.bar{height:3px;border-radius:3px;background:rgba(255,255,255,.07);margin-top:1.3rem;overflow:hidden}
+.bar i{display:block;height:100%;width:60%;background:linear-gradient(90deg,var(--pink),var(--purple),var(--cyan));box-shadow:0 0 10px var(--pink);animation:slide 3s ease-in-out infinite alternate}
+@keyframes slide{from{width:35%}to{width:100%}}
+.about{display:grid;grid-template-columns:1fr 1fr;gap:6vw;align-items:start}
+.about p{color:var(--muted)}.about p+p{margin-top:1.1rem}.about strong{color:var(--text)}
+.tags{display:flex;gap:8px;flex-wrap:wrap;margin-top:1.3rem}
+.tags span{font:11px var(--mono);padding:.3rem .75rem;border-radius:100px;border:1px solid rgba(168,85,255,.5);color:#d9b8ff}
+.tag{font:11px var(--mono);color:var(--cyan);letter-spacing:.06em}
+.timeline{border-left:1px solid rgba(255,45,149,.4);margin-top:2.4rem;padding-left:2rem;display:grid;gap:2rem}
+.timeline div{position:relative}
+.timeline div:before{content:"";position:absolute;left:calc(-2rem - 5px);top:.5rem;width:9px;height:9px;border-radius:50%;background:var(--pink);box-shadow:var(--glow-pink)}
+.timeline h3{font-size:1.15rem;margin:.2rem 0}
+.timeline p{color:var(--muted);font-size:.92rem;max-width:560px}
+
+/* ---------- Connect ---------- */
+.connect{text-align:center;border:1px solid var(--pink);border-radius:28px;padding:80px 6vw;background:radial-gradient(circle at 50% 0,rgba(255,45,149,.18),transparent 65%),var(--panel);box-shadow:0 0 40px rgba(255,45,149,.3),inset 0 0 40px rgba(255,45,149,.07)}
+.connect p{color:var(--muted);max-width:520px;margin:0 auto 2rem}
+footer{display:flex;justify-content:space-between;flex-wrap:wrap;gap:10px;padding:30px 6vw;border-top:1px solid var(--line);color:var(--muted);font-size:.8rem}
+
+/* ---------- Reveal ---------- */
+.reveal{opacity:0;transform:translateY(24px);transition:opacity .7s,transform .7s}
+.reveal.in{opacity:1;transform:none}
+
+/* ---------- Responsive ---------- */
+@media(max-width:900px){
+  .hero,.about{grid-template-columns:1fr}
+  .grid.g3,.grid.g4{grid-template-columns:1fr 1fr}
+  .visual{min-height:400px}
+  .menu{display:block}
+  .links{position:fixed;top:0;right:0;bottom:0;width:70%;flex-direction:column;padding:90px 8vw;background:rgba(7,6,12,.96);backdrop-filter:blur(16px);border-left:1px solid var(--pink);transform:translateX(100%);transition:.35s;font-size:1.05rem}
+  .links.open{transform:none}
+}
+@media(max-width:560px){.grid.g3,.grid.g4{grid-template-columns:1fr}.wrap{padding:80px 6vw}}
+@media(prefers-reduced-motion:reduce){*,*:before,*:after{animation:none!important;transition:none!important}html{scroll-behavior:auto}.reveal{opacity:1;transform:none}}
+</style>
+</head>
+<body>
+<div class="bg-grid"></div><div class="bg-glow g1"></div><div class="bg-glow g2"></div>
+
+<nav class="nav" id="nav">
+  <a class="brand" href="#home"><b>S.</b> Nandini</a>
+  <div class="links" id="links">
+    <a href="#about">About</a><a href="#skills">Skills</a><a href="#projects">Projects</a><a href="#learning">Learning</a><a href="#connect">Connect</a>
+  </div>
+  <button class="menu" id="menu" aria-label="Toggle menu" aria-expanded="false">☰</button>
+</nav>
+
+<main>
+<section class="wrap hero" id="home">
+  <div>
+    <div class="status"><span class="dot"></span>OPEN TO OPPORTUNITIES</div>
+    <h1>S. <span class="neon">Nandini</span><br>Securing the digital world.</h1>
+    <p class="lead">Python-focused cybersecurity learner with a growing passion for SOC analysis, threat detection, security monitoring and building practical security solutions.</p>
+    <div class="btns"><a class="btn primary" href="#projects">Explore my work</a><a class="btn ghost" href="#connect">Get in touch</a></div>
+  </div>
+  <div class="visual">
+    <div class="ring"></div>
+    <div class="card">
+      <div class="avatar">SN</div>
+      <h3>S. Nandini</h3><small>Cybersecurity Enthusiast</small>
+      <div class="term">
+        <div><span class="p">nandini@sec</span>:~$ whoami</div>
+        <div style="color:#777">python · soc · blue team</div>
+        <div><span class="p">nandini@sec</span>:~$ analyze --threat<span class="caret">▌</span></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="wrap reveal" id="about">
+  <div class="about">
+    <div><p class="mono">About</p><h2>Turning curiosity into <span class="neon">security.</span></h2></div>
+    <div>
+      <p>I'm <strong>S. Nandini</strong>, a cybersecurity enthusiast building my foundation around Python, Security Operations and defensive security. I enjoy understanding how attacks work, spotting suspicious activity and turning technical concepts into practical solutions.</p>
+      <p>My direction is <strong>SOC analysis</strong>: log analysis, incident triage, threat intelligence and security monitoring, with Python to automate repetitive tasks and build useful tools.</p>
+      <div class="tags"><span>Python</span><span>SOC</span><span>SIEM</span><span>Networking</span><span>Linux</span><span>Threat Intel</span></div>
+    </div>
+  </div>
+</section>
+
+<section class="wrap reveal" id="skills">
+  <p class="mono">Toolkit</p><h2>Skills built for <span class="neon">defense.</span></h2>
+  <div class="grid g3">
+    <article class="box"><div class="ico">Py</div><h3>Python</h3><p>Scripting, automation, data handling and security-focused utilities.</p><div class="bar"><i></i></div></article>
+    <article class="box"><div class="ico">SOC</div><h3>SOC Analysis</h3><p>Alert triage, log investigation, incident fundamentals and monitoring workflows.</p><div class="bar"><i></i></div></article>
+    <article class="box"><div class="ico">SI</div><h3>SIEM Concepts</h3><p>Events, correlation, detection logic and security dashboards.</p><div class="bar"><i></i></div></article>
+    <article class="box"><div class="ico">NW</div><h3>Networking</h3><p>TCP/IP, common protocols, traffic concepts and network security fundamentals.</p><div class="bar"><i></i></div></article>
+    <article class="box"><div class="ico">LI</div><h3>Linux</h3><p>Command line, system concepts and a security-oriented workflow.</p><div class="bar"><i></i></div></article>
+    <article class="box"><div class="ico">TI</div><h3>Threat Intelligence</h3><p>Indicators of compromise, attack patterns and context for suspicious activity.</p><div class="bar"><i></i></div></article>
+  </div>
+</section>
+
+<section class="wrap reveal" id="projects">
+  <p class="mono">Selected work</p><h2>Projects with a <span class="neon">security mindset.</span></h2>
+  <p class="lead-in">Concept projects that show practical thinking across Python, monitoring and defensive security.</p>
+  <div class="grid g3">
+    <article class="box"><span class="tag">PYTHON / AUTOMATION</span><h3>Log Sentinel</h3><p>A Python security log analyzer concept that parses events, flags suspicious patterns and writes a focused investigation summary.</p><div class="tags"><span>Python</span><span>Regex</span><span>Logs</span></div></article>
+    <article class="box"><span class="tag">SOC / DETECTION</span><h3>Alert Triage Desk</h3><p>A SOC workflow concept for prioritizing alerts by severity, evidence and investigation context.</p><div class="tags"><span>SOC</span><span>SIEM</span><span>IR</span></div></article>
+    <article class="box"><span class="tag">PYTHON / THREAT INTEL</span><h3>IOC Inspector</h3><p>A lightweight utility concept for organizing indicators of compromise and tracking investigation notes.</p><div class="tags"><span>Python</span><span>IOC</span><span>Intel</span></div></article>
+  </div>
+</section>
+
+<section class="wrap reveal" id="learning">
+  <p class="mono">Learning</p><h2>Knowledge is <span class="neon">the toolkit.</span></h2>
+  <div class="timeline">
+    <div><span class="tag">2026 · CYBERSECURITY</span><h3>SOC Analysis & Security Operations</h3><p>Focused learning in SOC workflows, monitoring, alert analysis and practical defensive security.</p></div>
+    <div><span class="tag">ONGOING · PYTHON</span><h3>Python for Security Automation</h3><p>Building scripts and utilities to strengthen investigation, automation and problem-solving.</p></div>
+    <div><span class="tag">FOUNDATIONS · NETWORKING</span><h3>Networking & Defensive Security</h3><p>Fundamentals in protocols, traffic, threats and defensive concepts.</p></div>
+  </div>
+</section>
+
+<section class="wrap reveal">
+  <p class="mono">What I bring</p><h2>How I <span class="neon">work.</span></h2>
+  <div class="grid g4">
+    <div class="box"><h3>Security Analysis</h3><p>A structured, evidence-first approach to alerts and events.</p></div>
+    <div class="box"><h3>Python Automation</h3><p>Small, useful workflows that replace repetitive tasks.</p></div>
+    <div class="box"><h3>Threat Investigation</h3><p>Connecting indicators, logs and context.</p></div>
+    <div class="box"><h3>Continuous Learning</h3><p>Labs, projects and experimentation.</p></div>
+  </div>
+</section>
+
+<section class="wrap reveal" id="connect">
+  <div class="connect">
+    <p class="mono">Let's connect</p>
+    <h2>Have a security challenge? <span class="neon">Let's talk.</span></h2>
+    <p>Open to internships, cybersecurity projects and conversations about SOC analysis and Python.</p>
+    <div class="btns" style="justify-content:center">
+      <a class="btn primary" href="mailto:nandhinisandolla@gmail.com">Email me</a>
+      <a class="btn ghost" href="https://www.linkedin.com/in/nandhini-sandolla-a18ab2390" target="_blank" rel="noopener noreferrer">LinkedIn</a>
+      <a class="btn ghost" href="https://github.com/nandhinisandolla-ui" target="_blank" rel="noopener noreferrer">GitHub</a>
+    </div>
+  </div>
+</section>
+</main>
+
+<footer><span>© 2026 S. Nandini</span><span><a href="https://github.com/nandhinisandolla-ui" target="_blank" rel="noopener noreferrer">GitHub</a> · <a href="https://www.linkedin.com/in/nandhini-sandolla-a18ab2390" target="_blank" rel="noopener noreferrer">LinkedIn</a></span></footer>
+
+<script>
+/* Sticky nav style */
+const nav=document.getElementById('nav');
+addEventListener('scroll',()=>nav.classList.toggle('scrolled',scrollY>20),{passive:true});
+
+/* Mobile menu */
+const menu=document.getElementById('menu'),links=document.getElementById('links');
+menu.addEventListener('click',()=>{const o=links.classList.toggle('open');menu.setAttribute('aria-expanded',o)});
+links.querySelectorAll('a').forEach(a=>a.addEventListener('click',()=>{links.classList.remove('open');menu.setAttribute('aria-expanded',false)}));
+
+/* Scroll reveal */
+const io=new IntersectionObserver(es=>es.forEach(e=>{if(e.isIntersecting){e.target.classList.add('in');io.unobserve(e.target)}}),{threshold:.12});
+document.querySelectorAll('.reveal').forEach(el=>io.observe(el));
+</script>
+</body>
+</html>
